@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -43,5 +44,19 @@ public class EncuestaController {
 
         return new ResponseEntity<>(null, httpHeaders,HttpStatus.CREATED);
     }
+
+    @GetMapping("/encuestas/{encuestaId}")
+    public ResponseEntity<?> obtenerEncuesta(@PathVariable Long encuestaId){
+        Optional<Encuesta> encuesta = encuestaRepository.findById(encuestaId);
+
+        if (encuesta.isPresent()){
+            return new ResponseEntity<>(encuesta, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
+
+
+
 
 }
