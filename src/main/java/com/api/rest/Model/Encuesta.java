@@ -25,6 +25,8 @@ public class Encuesta {
 
 
 //    una encuesta puede tener muchas opciones por  lo que es OneToMany RELACION UNO A MUCHOS
+
+
     @OneToMany(cascade = CascadeType.ALL)
 //    al definir la realacion solo aqui se llama realcion unidireccional si en opcion usaramos manytoone muchas opciones a una
 //    encuesa se convertiria en una relaicon bidireccional
@@ -32,6 +34,4 @@ public class Encuesta {
 //    se ordena por opciones
     @OrderBy
     private Set<Opcion> opciones;
-
-
 }

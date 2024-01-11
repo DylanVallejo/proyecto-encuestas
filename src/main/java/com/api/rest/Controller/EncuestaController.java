@@ -56,6 +56,23 @@ public class EncuestaController {
         }
     }
 
+//realizar el metodo para eliminar y actualizar
+
+    @DeleteMapping("/encuestas/{encuestaId}")
+    public ResponseEntity<?> eliminarEncuestas(@PathVariable Long encuestaId){
+        encuestaRepository.deleteById(encuestaId);
+        return new ResponseEntity<>("se ha eliminado la encuesta con id :" + encuestaId , HttpStatus.OK);
+    }
+
+
+    @PutMapping("/encuestas/{encuestaId}")
+    public ResponseEntity<?> actualizarEncuesta(@RequestBody Encuesta encuesta,@PathVariable Long encuestaId) {
+        encuesta.setId(encuestaId);
+        Encuesta encuestaResponse  = encuestaRepository.save(encuesta);
+//        return new ResponseEntity<>(encuestaResponse, HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
+
+    }
 
 
 
