@@ -4,6 +4,7 @@ package com.api.rest.Controller;
 import com.api.rest.Exception.ResourceNotFoundException;
 import com.api.rest.Model.Encuesta;
 import com.api.rest.Repository.EncuestaRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpHeaders;
@@ -29,7 +30,7 @@ public class EncuestaController {
 
 
     @PostMapping("/encuestas")
-    public ResponseEntity<?> crearEncuesta(@RequestBody Encuesta encuesta){
+    public ResponseEntity<?> crearEncuesta(@Valid @RequestBody Encuesta encuesta){
         encuesta = encuestaRepository.save(encuesta);
 
 
@@ -69,7 +70,7 @@ public class EncuestaController {
 
 
     @PutMapping("/encuestas/{encuestaId}")
-    public ResponseEntity<?> actualizarEncuesta(@RequestBody Encuesta encuesta,@PathVariable Long encuestaId) {
+    public ResponseEntity<?> actualizarEncuesta(@Valid @RequestBody Encuesta encuesta,@PathVariable Long encuestaId) {
         verifyEncuesta(encuestaId);
         encuesta.setId(encuestaId);
         Encuesta encuestaResponse  = encuestaRepository.save(encuesta);
