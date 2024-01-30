@@ -36,6 +36,6 @@ public class Encuesta {
     @JoinColumn(name = "encuesta_id")
 //    se ordena por opciones
     @OrderBy
-    @Size(min =2, max = 6)
+    @Size(min = 2, max = 6)
     private Set<Opcion> opciones;
 }

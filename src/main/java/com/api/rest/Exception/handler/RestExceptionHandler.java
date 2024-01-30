@@ -31,12 +31,14 @@ public class RestExceptionHandler {
         return new ResponseEntity<>(errorDetail, null, HttpStatus.NOT_FOUND);
     }
 
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<?> handleMethodArgumentNotValidException(MethodArgumentNotValidException exception, HttpServletRequest httpServletRequest){
         ErrorDetail errorDetail = new ErrorDetail();
         errorDetail.setTimeStamp(new Date().getTime());
         errorDetail.setStatus(HttpStatus.BAD_REQUEST.value());
 
-        String requestPath = (String) httpServletRequest.getAttribute("vajax.servlet.error.request_uri");
+        String requestPath = (String) httpServletRequest.getAttribute("javax.servlet.error.request_uri");
 
         if (requestPath == null){
             requestPath = httpServletRequest.getRequestURI();
