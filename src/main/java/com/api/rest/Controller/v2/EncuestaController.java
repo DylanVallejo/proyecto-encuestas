@@ -5,15 +5,17 @@ import com.api.rest.Exception.ResourceNotFoundException;
 import com.api.rest.Model.Encuesta;
 import com.api.rest.Repository.EncuestaRepository;
 import jakarta.validation.Valid;
-import org.hibernate.query.Page;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.awt.print.Pageable;
+
 import java.net.URI;
 import java.util.Optional;
 
@@ -24,18 +26,11 @@ public class EncuestaController {
     @Autowired    private EncuestaRepository encuestaRepository;
 
 
-//    @GetMapping("/encuestas")
-//    public ResponseEntity<Iterable<Encuesta>> listarTodasLasEncuestas(Pageable pageable){
-//        Page encuestas = encuestaRepository.findAll(pageable);
-//        return new ResponseEntity<>(encuestaRepository.findAll(), HttpStatus.OK);
-//    }
-
-
-//    @GetMapping("/encuestas")
-//    public ResponseEntity<Iterable<Encuesta>> listarTodasLasEncuestas(){
-//        return new ResponseEntity<>(encuestaRepository.findAll(), HttpStatus.OK);
-//    }
-
+    @GetMapping("/encuestas")
+    public ResponseEntity<Iterable<Encuesta>> listarTodasLasEncuestas(Pageable pageable){
+        Page<Encuesta> encuestas = encuestaRepository.findAll(pageable);
+        return new ResponseEntity<>(encuestas, HttpStatus.OK);
+    }
 
     @PostMapping("/encuestas")
     public ResponseEntity<?> crearEncuesta(@Valid @RequestBody Encuesta encuesta){

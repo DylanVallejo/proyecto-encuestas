@@ -31,13 +31,6 @@ public class EncuestaController {
         return new ResponseEntity<>(encuestaRepository.findAll(), HttpStatus.OK);
     }
 
-//    @GetMapping("/encuestas")
-//    public ResponseEntity<Iterable<Encuesta>> listarTodasLasEncuestas(Pageable pageable){
-//        Page<Encuesta> encuestas = encuestaRepository.findAll(pageable);
-//        return new ResponseEntity<>(encuestaRepository.findAll(), HttpStatus.OK);
-//    }
-
-
     @PostMapping("/encuestas")
     public ResponseEntity<?> crearEncuesta(@Valid @RequestBody Encuesta encuesta){
         encuesta = encuestaRepository.save(encuesta);
